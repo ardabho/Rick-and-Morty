@@ -1,4 +1,3 @@
-# super-duper-guide
-Rick and Morty API Test/Practice
+# Rick and Morty
 
-Rick and morty api practice
+Rick and Morty API Test/Practice
