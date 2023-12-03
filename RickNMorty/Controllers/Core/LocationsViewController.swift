@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LocationsViewController.swift
 //  RickNMorty
 //
 //  Created by ARDA BUYUKHATIPOGLU on 3.12.2023.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class LocationsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        view.backgroundColor = .systemRed
+        
     }
 
-
 }
-
