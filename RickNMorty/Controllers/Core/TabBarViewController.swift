@@ -20,14 +20,14 @@ final class TabBarViewController: UITabBarController {
     private lazy var locationsVC: UINavigationController = {
         let NC = UINavigationController(rootViewController: LocationsViewController())
         NC.navigationBar.prefersLargeTitles = true
-        NC.tabBarItem = UITabBarItem(title: "Location", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "sparkle.magnifyingglass"))
+        NC.tabBarItem = UITabBarItem(title: "Location", image: UIImage(systemName: "globe.desk"), selectedImage: UIImage(systemName: "globe.desk.fill"))
         return NC
     }()
     
     private lazy var episodesVC: UINavigationController = {
         let NC = UINavigationController(rootViewController: EpisodesViewController())
         NC.navigationBar.prefersLargeTitles = true
-        NC.tabBarItem = UITabBarItem(title: "Episodes", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
+        NC.tabBarItem = UITabBarItem(title: "Episodes", image: UIImage(systemName: "tv"), selectedImage: UIImage(systemName: "tv.inset.filled"))
         return NC
     }()
     

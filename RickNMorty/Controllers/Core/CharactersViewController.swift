@@ -13,7 +13,7 @@ final class CharactersViewController: UIViewController {
     var characters: [Character]?
     var page = 1
     var numberOfPages: Int?
-    
+     
     lazy var collectionView: UICollectionView = {
         
         let itemWidth = (self.view.frame.width - 50) / 3

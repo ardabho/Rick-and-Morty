@@ -29,7 +29,7 @@ class CollectionViewFooterButtons: UICollectionReusableView {
     
     lazy var nextButton: UIButton = {
         var config = UIButton.Configuration.filled()
-        config.baseBackgroundColor = Colors.darkBlue
+        config.baseBackgroundColor = Colors.crimson
         config.cornerStyle = .capsule
         config.title = "Next"
         config.titleAlignment = .center
