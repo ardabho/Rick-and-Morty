@@ -9,9 +9,23 @@ import UIKit
 
 class RMCharacterVC: UIViewController {
 
+    private let characterListView = CharacterListView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViewController()
+        configureCharacterListVC()
+    }
+    
+    
+    private func configureViewController() {
         view.backgroundColor = .systemBackground
     }
-
+    
+    
+    private func configureCharacterListVC() {
+        view.addSubview(characterListView)
+        characterListView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
+    }
+    
 }
