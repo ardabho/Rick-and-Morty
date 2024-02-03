@@ -1,5 +1,5 @@
 //
-//  CharacterListViewVM.swift
+//  RMCharacterListViewVM.swift
 //  RickAndMorty
 //
 //  Created by ARDA BUYUKHATIPOGLU on 2.02.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CharacterListViewVM: NSObject {
+final class RMCharacterListViewVM: NSObject {
     
     func fetchCharacters() {
         RMService.shared.execute(.listCharactersRequests, expecting: RMCharactersResponse.self) { result in
@@ -21,14 +21,16 @@ final class CharacterListViewVM: NSObject {
     }
 }
 
-extension CharacterListViewVM: UICollectionViewDataSource, UICollectionViewDelegate {
+extension RMCharacterListViewVM: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemRed
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterCollectionViewCell.identifier, for: indexPath) as? RMCharacterCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.setUpCell(with: RMCharacterCollectionViewCellVM(characterName: "Rick Sanchez", characterStatus: .alive, imageURL: URL(string: "https://rickandmortyapi.com/api/character/avatar/215.jpeg")))
         return cell
     }
     

@@ -8,10 +8,10 @@
 import UIKit
 
 /// View that handles showing list of characters, loader, etc
-class CharacterListView: UIView {
+class RMCharacterListView: UIView {
     
-    private let viewModel = CharacterListViewVM()
-    private let loadingSpinner = LoadingSpinnerView()
+    private let viewModel = RMCharacterListViewVM()
+    private let loadingSpinner = RMLoadingSpinnerView()
     private var collectionView: UICollectionView!
     
     override init(frame: CGRect) {
@@ -40,9 +40,9 @@ class CharacterListView: UIView {
     
     
     private func configureCollectionView(){
-        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.createTwoColumnFlowLayout(in: self))
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.identifier)
+        addSubview(self.collectionView)
         
         collectionView.isHidden = true
         collectionView.alpha = 0
@@ -51,10 +51,13 @@ class CharacterListView: UIView {
         collectionView.dataSource   = viewModel
         collectionView.delegate     = viewModel
         
-        addSubview(self.collectionView)
         self.collectionView.pinToEdges(of: self)
-        
-        
+    }
+    
+    
+    private func getCharactersData() {
+        loadingSpinner.startLoadingAnimation()
+        viewModel.fetchCharacters()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
             self.loadingSpinner.stopLoadingAnimation()
             self.collectionView.isHidden = false
@@ -63,11 +66,5 @@ class CharacterListView: UIView {
                 self.collectionView.alpha = 1
             }
         })
-    }
-    
-    
-    private func getCharactersData() {
-        loadingSpinner.startLoadingAnimation()
-        viewModel.fetchCharacters()
     }
 }

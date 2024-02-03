@@ -7,13 +7,14 @@
 
 import UIKit
 
-class LoadingSpinnerView: UIView {
+class RMLoadingSpinnerView: UIView {
 
     private let spinner = UIActivityIndicatorView()
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        configureView()
         configureActivityIndicator()
     }
     
@@ -22,7 +23,7 @@ class LoadingSpinnerView: UIView {
     }
     
     
-    private func configure() {
+    private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -50,3 +51,4 @@ class LoadingSpinnerView: UIView {
         spinner.stopAnimating()
     }
 }
+
