@@ -13,7 +13,7 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
     
     private var characterImageView: UIImageView!
     private let nameLabel = RMLabel(fontsize: 18, fontWeight: .semibold, textAlignment: .center)
-    private let statusLabel = RMLabel(fontsize: 16, fontWeight: .regular, textAlignment: .center)
+    private let statusLabel = RMLabel(fontsize: 16, fontWeight: .regular, textAlignment: .left)
     
     private let cornerRadius: CGFloat = 10
     
@@ -33,8 +33,22 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
     
     private func configureCell() {
         backgroundColor = .secondarySystemBackground
-        clipsToBounds = true
         layer.cornerRadius = cornerRadius
+        configureShadow()
+    }
+    
+    
+    private func configureShadow() {
+        layer.shadowColor = UIColor.label.cgColor
+        layer.shadowOpacity = 0.3
+        layer.shadowOffset = CGSize(width: -2, height: 2)
+        layer.shadowRadius = 4
+    }
+    
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureShadow()
     }
     
     
@@ -67,11 +81,11 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant:  -5),
             
             statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 3),
-            statusLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            statusLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            statusLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            statusLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
 
-            statusLabel.heightAnchor.constraint(equalTo: nameLabel.heightAnchor),
+            statusLabel.heightAnchor.constraint(equalTo: nameLabel.heightAnchor, multiplier: 0.6),
         ])
     }
     
@@ -81,7 +95,7 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
     ///   - viewModel: The view model containing character information to be displayed.
     internal func setUpCell(with viewModel: RMCharacterCollectionViewCellVM) {
         self.nameLabel.text = viewModel.characterName
-        self.statusLabel.text = viewModel.characterStatusText
+        self.statusLabel.text = "Status: \(viewModel.characterStatusText)"
         
         viewModel.fetchImage { [weak self] result in
             guard let self else { return }

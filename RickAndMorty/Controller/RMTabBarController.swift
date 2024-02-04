@@ -75,7 +75,3 @@ final class RMTabBarController: UITabBarController {
         return settingsNC
     }
 }
-
-#Preview {
-    RMTabBarController()
-}

@@ -30,6 +30,7 @@ class RMCharacterListView: UIView {
     
     private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
+        viewModel.delegate = self
     }
     
     
@@ -46,7 +47,7 @@ class RMCharacterListView: UIView {
         
         collectionView.isHidden = true
         collectionView.alpha = 0
-        
+    
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource   = viewModel
         collectionView.delegate     = viewModel
@@ -58,13 +59,16 @@ class RMCharacterListView: UIView {
     private func getCharactersData() {
         loadingSpinner.startLoadingAnimation()
         viewModel.fetchCharacters()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            self.loadingSpinner.stopLoadingAnimation()
-            self.collectionView.isHidden = false
-            
-            UIView.animate(withDuration: 0.5) {
-                self.collectionView.alpha = 1
-            }
-        })
+    }
+}
+
+extension RMCharacterListView: RMCharacterListViewVMDelegate {
+    func didLoadInitialCharacters() {
+        collectionView.reloadData()
+        collectionView.isHidden = false
+        loadingSpinner.stopLoadingAnimation()
+        UIView.animate(withDuration: 0.5) {
+            self.collectionView.alpha = 1
+        }
     }
 }

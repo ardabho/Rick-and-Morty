@@ -18,7 +18,7 @@ struct UIHelper {
         
         let flowlayout = UICollectionViewFlowLayout()
         flowlayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowlayout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
+        flowlayout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.4)
         flowlayout.minimumInteritemSpacing = minimumItemSpacing
         
         return flowlayout

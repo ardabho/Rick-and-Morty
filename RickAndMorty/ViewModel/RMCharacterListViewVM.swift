@@ -7,13 +7,37 @@
 
 import UIKit
 
+
+protocol RMCharacterListViewVMDelegate: AnyObject {
+    func didLoadInitialCharacters()
+}
+
 final class RMCharacterListViewVM: NSObject {
     
+    weak var delegate: RMCharacterListViewVMDelegate?
+    
+    private var characters: [RMCharacter] = [] {
+        didSet {
+            for character in characters {
+                let viewModel = RMCharacterCollectionViewCellVM(characterName: character.name, characterStatus: character.status, imageURL: URL(string: character.image))
+                cellViewModels.append(viewModel)
+                DispatchQueue.main.async {
+                    self.delegate?.didLoadInitialCharacters()
+                }
+            }
+        }
+    }
+    
+    private var cellViewModels: [RMCharacterCollectionViewCellVM] = [] //Array of View Models to populate collection view
+    
+    
     func fetchCharacters() {
-        RMService.shared.execute(.listCharactersRequests, expecting: RMCharactersResponse.self) { result in
+        RMService.shared.execute(.listCharactersRequests, expecting: RMCharactersResponse.self) { [weak self] result in
+            guard let self else { return }
+            
             switch result {
-            case .success(let characters):
-                print("characters success")
+            case .success(let charactersResponse):
+                self.characters = charactersResponse.results
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -22,17 +46,17 @@ final class RMCharacterListViewVM: NSObject {
 }
 
 extension RMCharacterListViewVM: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return cellViewModels.count
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterCollectionViewCell.identifier, for: indexPath) as? RMCharacterCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setUpCell(with: RMCharacterCollectionViewCellVM(characterName: "Rick Sanchez", characterStatus: .alive, imageURL: URL(string: "https://rickandmortyapi.com/api/character/avatar/215.jpeg")))
+        cell.setUpCell(with: cellViewModels[indexPath.row])
         return cell
     }
-    
-    
 }
