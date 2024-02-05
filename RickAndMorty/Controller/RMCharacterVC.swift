@@ -7,9 +7,10 @@
 
 import UIKit
 
-class RMCharacterVC: UIViewController {
-
-    private let characterListView = RMCharacterListView()
+class RMCharacterVC: UIViewController, RMCharacterListViewDelegate {
+    
+    private let characterListView = RickAndMorty.RMCharacterListView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,16 @@ class RMCharacterVC: UIViewController {
     
     private func configureCharacterListVC() {
         view.addSubview(characterListView)
+        characterListView.delegate = self
         characterListView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
+    }
+    
+    
+    func RMCharacterListView(_ rmCharacterListView: RMCharacterListView, didSelectCharacter character: RMCharacter) {
+        let detailViewModel = RMCharacterDetailVM(character: character)
+        let characterDetailVC = RMCharacterDetailVC(with: detailViewModel)
+        characterDetailVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(characterDetailVC, animated: true)
     }
     
 }

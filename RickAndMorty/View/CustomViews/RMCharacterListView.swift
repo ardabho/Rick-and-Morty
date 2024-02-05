@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol RMCharacterListViewDelegate: AnyObject {
+    func RMCharacterListView(_ rmCharacterListView: RMCharacterListView, didSelectCharacter character: RMCharacter)
+}
 /// View that handles showing list of characters, loader, etc
 class RMCharacterListView: UIView {
     
     private let viewModel = RMCharacterListViewVM()
     private let loadingSpinner = RMLoadingSpinnerView()
     private var collectionView: UICollectionView!
+    
+    weak var delegate: RMCharacterListViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,6 +68,10 @@ class RMCharacterListView: UIView {
 }
 
 extension RMCharacterListView: RMCharacterListViewVMDelegate {
+    func didSelectCharacter(_ character: RMCharacter) {
+        self.delegate?.RMCharacterListView(self, didSelectCharacter: character)
+    }
+    
     func didLoadInitialCharacters() {
         collectionView.reloadData()
         collectionView.isHidden = false

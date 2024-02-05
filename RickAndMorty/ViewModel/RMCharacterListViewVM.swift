@@ -10,8 +10,10 @@ import UIKit
 
 protocol RMCharacterListViewVMDelegate: AnyObject {
     func didLoadInitialCharacters()
+    func didSelectCharacter(_ character: RMCharacter)
 }
 
+/// View Model to handle character list view logic
 final class RMCharacterListViewVM: NSObject {
     
     weak var delegate: RMCharacterListViewVMDelegate?
@@ -29,8 +31,9 @@ final class RMCharacterListViewVM: NSObject {
     }
     
     private var cellViewModels: [RMCharacterCollectionViewCellVM] = [] //Array of View Models to populate collection view
+    private var apiInfo: RMInfo? = nil
     
-    
+    ///Fetch initial set of characters(20)
     func fetchCharacters() {
         RMService.shared.execute(.listCharactersRequests, expecting: RMCharactersResponse.self) { [weak self] result in
             guard let self else { return }
@@ -38,12 +41,24 @@ final class RMCharacterListViewVM: NSObject {
             switch result {
             case .success(let charactersResponse):
                 self.characters = charactersResponse.results
+                self.apiInfo    = charactersResponse.info
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
+    
+    ///Paginate if  additional characters are needed
+    func fetchAdditionalCharacters() {
+        
+    }
+    
+    var shouldShowLoadingIndicator: Bool {
+        return apiInfo?.next != nil
+    }
 }
+
+// MARK: - Collection View
 
 extension RMCharacterListViewVM: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -58,5 +73,19 @@ extension RMCharacterListViewVM: UICollectionViewDataSource, UICollectionViewDel
         }
         cell.setUpCell(with: cellViewModels[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.didSelectCharacter(characters[indexPath.row])
+    }
+}
+
+// MARK: - Scrollview
+
+extension RMCharacterListViewVM: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard shouldShowLoadingIndicator else {
+            return
+        }
     }
 }
