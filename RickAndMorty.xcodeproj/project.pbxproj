@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		991792042B72862C0097D74C /* RMFooterLoadingCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991792032B72862C0097D74C /* RMFooterLoadingCollectionReusableView.swift */; };
 		9926399A2B6A554D00F55B96 /* RMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992639992B6A554D00F55B96 /* RMService.swift */; };
 		9926399C2B6A594E00F55B96 /* RMRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9926399B2B6A594E00F55B96 /* RMRequest.swift */; };
 		9926399E2B6A59AF00F55B96 /* RMEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9926399D2B6A59AF00F55B96 /* RMEndpoint.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		991792032B72862C0097D74C /* RMFooterLoadingCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFooterLoadingCollectionReusableView.swift; sourceTree = "<group>"; };
 		992639992B6A554D00F55B96 /* RMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMService.swift; sourceTree = "<group>"; };
 		9926399B2B6A594E00F55B96 /* RMRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMRequest.swift; sourceTree = "<group>"; };
 		9926399D2B6A59AF00F55B96 /* RMEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEndpoint.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				99B30EAB2B6D133E00196316 /* RMCharacterListView.swift */,
 				99B30EB02B6D1E5500196316 /* RMLoadingSpinnerView.swift */,
+				991792032B72862C0097D74C /* RMFooterLoadingCollectionReusableView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				999F35A42B6E4B9C00D5CE22 /* RMCharacterCollectionViewCell.swift in Sources */,
 				992639B02B6C335C00F55B96 /* RMInfo.swift in Sources */,
 				9976CAD32B6985B700C4FEFD /* RMCharacterVC.swift in Sources */,
+				991792042B72862C0097D74C /* RMFooterLoadingCollectionReusableView.swift in Sources */,
 				9926399E2B6A59AF00F55B96 /* RMEndpoint.swift in Sources */,
 				9976CAD92B6985E500C4FEFD /* RMSettingsVC.swift in Sources */,
 				9976CAD72B6985D700C4FEFD /* RMEpisodeVC.swift in Sources */,
