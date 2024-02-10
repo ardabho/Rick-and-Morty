@@ -19,6 +19,7 @@ class RMCharacterListView: UIView {
     
     weak var delegate: RMCharacterListViewDelegate?
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
@@ -69,10 +70,14 @@ class RMCharacterListView: UIView {
     }
 }
 
+// MARK: RMCharacterListViewVMDelegate
+
 extension RMCharacterListView: RMCharacterListViewVMDelegate {
+    
     func didSelectCharacter(_ character: RMCharacter) {
         self.delegate?.RMCharacterListView(self, didSelectCharacter: character)
     }
+    
     
     func didLoadInitialCharacters() {
         collectionView.reloadData()
@@ -80,6 +85,15 @@ extension RMCharacterListView: RMCharacterListViewVMDelegate {
         loadingSpinner.stopLoadingAnimation()
         UIView.animate(withDuration: 0.5) {
             self.collectionView.alpha = 1
+        }
+    }
+    
+    
+    func didLoadAdditionalCharacters(with newIndexPaths: [IndexPath]) {
+        DispatchQueue.main.async {
+            self.collectionView.performBatchUpdates {
+                self.collectionView.insertItems(at: newIndexPaths)
+            }
         }
     }
 }

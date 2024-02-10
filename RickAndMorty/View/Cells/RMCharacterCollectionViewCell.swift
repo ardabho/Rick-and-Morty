@@ -58,7 +58,7 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
         
         characterImageView.contentMode = .scaleAspectFit
         characterImageView.translatesAutoresizingMaskIntoConstraints = false
-        characterImageView.backgroundColor = .blue
+        characterImageView.backgroundColor = .lightGray
         
         characterImageView.layer.cornerRadius = cornerRadius
         characterImageView.clipsToBounds = true
@@ -110,5 +110,12 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    
+    override func prepareForReuse() {
+        characterImageView.image = nil
+        nameLabel.text = nil
+        statusLabel.text = nil
     }
 }
