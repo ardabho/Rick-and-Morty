@@ -56,7 +56,6 @@ final class RMCharacterListViewVM: NSObject {
     ///Paginate if  additional characters are needed
     func fetchAdditionalCharacters(from url: URL) {
         isLoadingMoreCharacters = true
-        print("fething more characters")
         guard let request = RMRequest(url: url) else {
             isLoadingMoreCharacters = false
             print("Failed to create request")
