@@ -18,6 +18,7 @@ class RMLoadingSpinnerView: UIView {
         configureActivityIndicator()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("Unsupported")
     }
