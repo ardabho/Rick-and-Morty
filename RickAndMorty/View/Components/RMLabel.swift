@@ -25,7 +25,7 @@ class RMLabel: UILabel {
         self.font = UIFont.systemFont(ofSize: fontsize, weight: fontWeight)
         self.textAlignment = textAlignment
     }
-    
+
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false

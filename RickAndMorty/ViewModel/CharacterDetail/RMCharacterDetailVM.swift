@@ -11,13 +11,39 @@ final class RMCharacterDetailVM {
     
     private let character: RMCharacter
     private let spacing: CGFloat = 5 //Collection view group  spacing
-    enum SectionType: CaseIterable { case photo, information, episodes }
-    let sections = SectionType.allCases
+    enum SectionType {
+        case photo(viewModel: RMCharacterPhotoCellVM)
+        case information(viewModels: [RmCharacterDetailInfoCellVM])
+        case episodes(viewModels: [RMEpisodeCollectionCellVM])
+    }
+    var sections: [SectionType] = []
     
     // MARK: - Init
     
     init(character: RMCharacter) {
         self.character = character
+        setUpSections()
+    }
+    
+    
+    private func setUpSections() {
+        sections = [
+            .photo(viewModel: RMCharacterPhotoCellVM(imageUrl: URL(string: character.image))),
+            .information(viewModels: [
+                RmCharacterDetailInfoCellVM(value: character.status.text, title: "Status"),
+                RmCharacterDetailInfoCellVM(value: character.gender.rawValue, title: "Gender"),
+                RmCharacterDetailInfoCellVM(value: character.type, title: "Type"),
+                RmCharacterDetailInfoCellVM(value: character.species, title: "Species"),
+                RmCharacterDetailInfoCellVM(value: character.origin.name, title: "Origin"),
+                RmCharacterDetailInfoCellVM(value: character.location.name, title: "Location"),
+                RmCharacterDetailInfoCellVM(value: character.created, title: "Created"),
+                RmCharacterDetailInfoCellVM(value: String(character.episode.count), title: "Total Episodes"),
+                
+            ]),
+            .episodes(viewModels: character.episode.compactMap ({
+                return RMEpisodeCollectionCellVM(episodeDataUrl: URL(string: $0))
+            }))
+        ]
     }
     
     
@@ -38,7 +64,6 @@ final class RMCharacterDetailVM {
             subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = spacing
         section.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
         
         return section

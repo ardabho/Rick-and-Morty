@@ -8,5 +8,11 @@
 import Foundation
 
 struct RmCharacterDetailInfoCellVM {
+    let value: String
+    let title: String
     
+    init(value: String, title: String) {
+        self.value = value
+        self.title = title
+    }
 }

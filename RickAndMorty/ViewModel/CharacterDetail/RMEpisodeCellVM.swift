@@ -8,5 +8,9 @@
 import Foundation
 
 struct RMEpisodeCollectionCellVM {
+    let episodeDataUrl: URL?
     
+    init(episodeDataUrl: URL?) {
+        self.episodeDataUrl = episodeDataUrl
+    }
 }

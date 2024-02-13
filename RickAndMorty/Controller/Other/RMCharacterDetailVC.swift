@@ -67,33 +67,40 @@ extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSou
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
+        let sectionType = viewModel.sections[section]
+        
+        switch sectionType {
+        case .photo:
             return 1
-        case 1:
-            return 8
-        case 2:
-            return 20
-        default:
-            return 1
-            
+        case .information(let viewModels):
+            return viewModels.count
+        case .episodes(viewModels: let viewModels):
+            return viewModels.count
         }
     }
 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
         switch viewModel.sections[indexPath.section] {
-        case .photo:
-            cell.backgroundColor = .cyan
-        case .information:
-            cell.backgroundColor = .systemGreen
-        case .episodes:
-            cell.backgroundColor = .brown
+        case .photo(let viewModel):
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterPhotoCollectionViewCell.identifier, for: indexPath) as? RMCharacterPhotoCollectionViewCell {
+                cell.configure(with: viewModel)
+                return cell
+            }
+        case .information(let viewModels):
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RmCharacterDetailInfoViewCell.identifier, for: indexPath) as? RmCharacterDetailInfoViewCell {
+                
+                return cell
+            }
+        case .episodes(let viewModels):
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMEpisodeCollectionViewCell.identifier, for: indexPath) as? RMEpisodeCollectionViewCell {
+                cell.backgroundColor = .blue
+                return cell
+            }
         }
         
-        return cell
+        return UICollectionViewCell()
     }
     
     

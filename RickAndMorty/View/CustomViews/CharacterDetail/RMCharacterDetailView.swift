@@ -33,6 +33,7 @@ class RMCharacterDetailView: UIView {
         loadingSpinner.startLoadingAnimation()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -45,7 +46,10 @@ class RMCharacterDetailView: UIView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(RMCharacterPhotoCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterPhotoCollectionViewCell.identifier)
+        collectionView.register(RmCharacterDetailInfoViewCell.self, forCellWithReuseIdentifier: RmCharacterDetailInfoViewCell.identifier)
+        collectionView.register(RMEpisodeCollectionViewCell.self, forCellWithReuseIdentifier: RMEpisodeCollectionViewCell.identifier)
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         self.collectionView = collectionView
