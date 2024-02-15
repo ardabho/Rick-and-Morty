@@ -45,6 +45,4 @@ extension UIView {
             bottomAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    
 }

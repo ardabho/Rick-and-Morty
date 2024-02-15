@@ -51,14 +51,13 @@ final class RmCharacterDetailInfoViewCell: UICollectionViewCell {
             titleContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             titleContainer.topAnchor.constraint(equalTo: contentView.topAnchor),
-            titleContainer.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.33),
+            titleContainer.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.40),
         ])
     }
     
     
     private func configureIconImageView() {
         iconImageView = UIImageView()
-        iconImageView.image = UIImage(systemName: "globe.europe.africa.fill")
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         titleContainer.addSubview(iconImageView)
         
@@ -74,7 +73,6 @@ final class RmCharacterDetailInfoViewCell: UICollectionViewCell {
     
     private func configureTitleLabel() {
         titleContainer.addSubview(titleLabel)
-        titleLabel.text = "Total\nEpisodes"
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: titleContainer.centerXAnchor),
@@ -101,7 +99,6 @@ final class RmCharacterDetailInfoViewCell: UICollectionViewCell {
     
     
     private func configureValueLabel() {
-        valueLabel.text = "value"
         valueLabel.numberOfLines = 0
         valueLabel.adjustsFontSizeToFitWidth = false
         valueContainer.addSubview(valueLabel)
@@ -112,5 +109,24 @@ final class RmCharacterDetailInfoViewCell: UICollectionViewCell {
             valueLabel.widthAnchor.constraint(lessThanOrEqualTo: valueContainer.widthAnchor, multiplier: 0.9),
             valueLabel.heightAnchor.constraint(lessThanOrEqualTo: valueContainer.heightAnchor, multiplier: 0.9)
         ])
+    }
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        valueLabel.text = nil
+        titleLabel.text = nil
+        iconImageView.image = nil
+        iconImageView.tintColor = .label
+        titleLabel.tintColor = .label
+    }
+    
+    
+    public func configure(with viewModel: RmCharacterDetailInfoCellVM) {
+        titleLabel.text = viewModel.title
+        valueLabel.text = viewModel.displayValue
+        iconImageView.image = viewModel.iconImage
+        iconImageView.tintColor = viewModel.tintColor
+        titleLabel.textColor = viewModel.tintColor
     }
 }

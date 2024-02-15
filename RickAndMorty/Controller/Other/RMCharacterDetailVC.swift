@@ -10,7 +10,6 @@ import UIKit
 class RMCharacterDetailVC: UIViewController {
     
     private let viewModel: RMCharacterDetailVM
-    
     private let detailView: RMCharacterDetailView
     
     // MARK: init
@@ -59,6 +58,8 @@ class RMCharacterDetailVC: UIViewController {
 }
 
 
+// MARK: Collection view methods
+
 extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -90,7 +91,7 @@ extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSou
             }
         case .information(let viewModels):
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RmCharacterDetailInfoViewCell.identifier, for: indexPath) as? RmCharacterDetailInfoViewCell {
-                
+                cell.configure(with: viewModels[indexPath.row])
                 return cell
             }
         case .episodes(let viewModels):

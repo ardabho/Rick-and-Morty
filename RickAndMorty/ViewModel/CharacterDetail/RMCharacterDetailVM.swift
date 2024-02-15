@@ -30,15 +30,14 @@ final class RMCharacterDetailVM {
         sections = [
             .photo(viewModel: RMCharacterPhotoCellVM(imageUrl: URL(string: character.image))),
             .information(viewModels: [
-                RmCharacterDetailInfoCellVM(value: character.status.text, title: "Status"),
-                RmCharacterDetailInfoCellVM(value: character.gender.rawValue, title: "Gender"),
-                RmCharacterDetailInfoCellVM(value: character.type, title: "Type"),
-                RmCharacterDetailInfoCellVM(value: character.species, title: "Species"),
-                RmCharacterDetailInfoCellVM(value: character.origin.name, title: "Origin"),
-                RmCharacterDetailInfoCellVM(value: character.location.name, title: "Location"),
-                RmCharacterDetailInfoCellVM(value: character.created, title: "Created"),
-                RmCharacterDetailInfoCellVM(value: String(character.episode.count), title: "Total Episodes"),
-                
+                RmCharacterDetailInfoCellVM(type: .status, value: character.status.text),
+                RmCharacterDetailInfoCellVM(type: .gender, value: character.gender.rawValue) ,
+                RmCharacterDetailInfoCellVM(type: .type, value: character.type ),
+                RmCharacterDetailInfoCellVM(type: .species, value: character.species ),
+                RmCharacterDetailInfoCellVM(type: .origin, value: character.origin.name ),
+                RmCharacterDetailInfoCellVM(type: .location, value: character.location.name ),
+                RmCharacterDetailInfoCellVM(type: .created, value: character.created ),
+                RmCharacterDetailInfoCellVM(type: .episodeCount, value: String(character.episode.count)),
             ]),
             .episodes(viewModels: character.episode.compactMap ({
                 return RMEpisodeCollectionCellVM(episodeDataUrl: URL(string: $0))
@@ -79,7 +78,7 @@ final class RMCharacterDetailVM {
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1), heightDimension: .absolute(150)),
+                widthDimension: .fractionalWidth(1), heightDimension: .absolute(120)),
             subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
