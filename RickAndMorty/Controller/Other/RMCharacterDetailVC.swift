@@ -96,7 +96,7 @@ extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSou
             }
         case .episodes(let viewModels):
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMEpisodeCollectionViewCell.identifier, for: indexPath) as? RMEpisodeCollectionViewCell {
-                cell.backgroundColor = .blue
+                cell.configure(with: viewModels[indexPath.row])
                 return cell
             }
         }
@@ -104,5 +104,17 @@ extension RMCharacterDetailVC: UICollectionViewDelegate, UICollectionViewDataSou
         return UICollectionViewCell()
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch viewModel.sections[indexPath.section] {
+        case .photo, .information:
+            break
+        case .episodes:
+            let episodes = self.viewModel.episodes
+            let selection = episodes[indexPath.row]
+            let vc = RMEpisodeDetailVC(url: URL(string: selection))
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     
 }

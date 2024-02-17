@@ -11,12 +11,12 @@ import Foundation
 final class RMRequest {
     
     private struct Constants { static let baseUrl = "https://rickandmortyapi.com/api" }
-    private let endpoint: RMEndpoint
+    let endpoint: RMEndpoint
     private let pathComponents: [String]
     private let queryParameters: [URLQueryItem]
     
     ///Constructed url for the api request in string format
-    private var urlString: String {
+    var urlString: String {
         var string = Constants.baseUrl + "/" + endpoint.rawValue
         
         if !pathComponents.isEmpty {

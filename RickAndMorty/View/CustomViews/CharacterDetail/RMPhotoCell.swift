@@ -39,8 +39,10 @@ final class RMCharacterPhotoCollectionViewCell: UICollectionViewCell {
         viewModel.fetchImage { [weak self] result in
             switch result {
             case .success(let data):
-                let image = UIImage(data: data)
-                self?.avatarImageView.image = image
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data)
+                    self?.avatarImageView.image = image
+                }
             case .failure(let error):
                 print(error.localizedDescription)
                 break

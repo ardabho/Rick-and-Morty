@@ -21,14 +21,14 @@ extension UIView {
     
     /// Pins the current view to the edges of the specified superview.
     /// - Parameter superview: The superview to which the current view will be pinned.
-    func pinToEdges(of superview: UIView) {
+    func pinToEdges(of superview: UIView, withPadding padding: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: superview.topAnchor),
-            leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+            topAnchor.constraint(equalTo: superview.topAnchor, constant: padding),
+            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: padding),
+            trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -padding),
+            bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -padding)
         ])
     }
     

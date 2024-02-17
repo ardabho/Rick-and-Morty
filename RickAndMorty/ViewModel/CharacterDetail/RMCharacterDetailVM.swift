@@ -17,7 +17,9 @@ final class RMCharacterDetailVM {
         case episodes(viewModels: [RMEpisodeCollectionCellVM])
     }
     var sections: [SectionType] = []
-    
+    var episodes: [String] {
+        return character.episode
+    }
     // MARK: - Init
     
     init(character: RMCharacter) {

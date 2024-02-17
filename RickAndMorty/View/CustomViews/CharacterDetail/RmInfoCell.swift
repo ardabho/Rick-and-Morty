@@ -38,6 +38,8 @@ final class RmCharacterDetailInfoViewCell: UICollectionViewCell {
         contentView.backgroundColor = .secondarySystemBackground
         contentView.layer.cornerRadius = 10
         contentView.clipsToBounds = true
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
     }
     
     
