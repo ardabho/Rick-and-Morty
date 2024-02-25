@@ -40,7 +40,7 @@ final class RMEpisodeCollectionViewCell: UICollectionViewCell {
         stackView.spacing = 2
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-
+        
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(episodeLabel)
         stackView.addArrangedSubview(nameLabel)
@@ -48,6 +48,7 @@ final class RMEpisodeCollectionViewCell: UICollectionViewCell {
         
         stackView.pinToEdges(of: contentView, withPadding: 10)
     }
+    
     
     func configure(with viewModel: RMEpisodeCollectionCellVM) {
         viewModel.registerForData { [weak self] episodeData in
@@ -61,9 +62,10 @@ final class RMEpisodeCollectionViewCell: UICollectionViewCell {
     }
     
     
-    override func prepareForReuse() {
-        
+    func configureList(with viewModel: RMEpisodeListCollectionViewCellVM) {
+        self.episodeLabel.text = viewModel.episode
+        self.nameLabel.text = viewModel.name
+        self.airDateLabel.text = viewModel.airDate
     }
-    
     
 }

@@ -51,7 +51,7 @@ final class RMTabBarController: UITabBarController {
     
     
     private func createEpisodeNC() -> UINavigationController {
-        let episodeVC = RMLocationVC()
+        let episodeVC = RMEpisodeVC()
         episodeVC.navigationItem.largeTitleDisplayMode = .automatic
         episodeVC.title = "Episodes"
         
@@ -64,7 +64,7 @@ final class RMTabBarController: UITabBarController {
     
     
     private func createSettingsNC() -> UINavigationController {
-        let settingsVC = RMLocationVC()
+        let settingsVC = RMSettingsVC()
         settingsVC.navigationItem.largeTitleDisplayMode = .automatic
         settingsVC.title = "Settings"
         

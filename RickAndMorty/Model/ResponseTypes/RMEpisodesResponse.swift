@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct RMEpisodesResponse: Codable {
+    let info: RMInfo
+    let results: [RMEpisode]
+}
