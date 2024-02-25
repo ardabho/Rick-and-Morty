@@ -16,6 +16,7 @@ class RMCharacterVC: UIViewController, RMCharacterListViewDelegate {
         super.viewDidLoad()
         configureViewController()
         configureCharacterListVC()
+        addSearchButton()
     }
     
     
@@ -28,6 +29,17 @@ class RMCharacterVC: UIViewController, RMCharacterListViewDelegate {
         view.addSubview(characterListView)
         characterListView.delegate = self
         characterListView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
+    }
+    
+    
+    private func addSearchButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
+    }
+    
+    
+    @objc private func searchTapped() {
+        let searchVC = RMSearchVC(searchCategory: .init(type: .character))
+        navigationController?.pushViewController(searchVC, animated: true)
     }
     
     

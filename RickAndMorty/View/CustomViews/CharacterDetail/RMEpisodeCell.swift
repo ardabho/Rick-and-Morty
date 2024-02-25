@@ -33,6 +33,7 @@ final class RMEpisodeCollectionViewCell: UICollectionViewCell {
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.systemOrange.cgColor
         contentView.layer.masksToBounds = true
+        
     }
     
     
@@ -49,7 +50,7 @@ final class RMEpisodeCollectionViewCell: UICollectionViewCell {
         stackView.pinToEdges(of: contentView, withPadding: 10)
     }
     
-    
+    /// Used in character detail screen
     func configure(with viewModel: RMEpisodeCollectionCellVM) {
         viewModel.registerForData { [weak self] episodeData in
             guard let self else { return }
@@ -61,11 +62,12 @@ final class RMEpisodeCollectionViewCell: UICollectionViewCell {
         viewModel.fetchEpisode()
     }
     
-    
+    /// Used in episode list screen
     func configureList(with viewModel: RMEpisodeListCollectionViewCellVM) {
         self.episodeLabel.text = viewModel.episode
         self.nameLabel.text = viewModel.name
         self.airDateLabel.text = viewModel.airDate
+        self.contentView.layer.borderColor = viewModel.borderColor.cgColor
     }
     
 }

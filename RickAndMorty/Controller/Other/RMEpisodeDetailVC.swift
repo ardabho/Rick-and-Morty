@@ -10,7 +10,7 @@ import UIKit
 class RMEpisodeDetailVC: UIViewController {
 
     private let viewModel: RMEpisodeDetailVM
-    
+    private let episodeView = RMEpisodeDetailView()
     
     init(url: URL?) {
         self.viewModel = RMEpisodeDetailVM(url: url)
@@ -25,10 +25,14 @@ class RMEpisodeDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Episode"
-        view.backgroundColor = .systemGreen
+        configureVC()
     }
     
+    private func configureVC() {
+        title = "Episode"
+        view.addSubview(episodeView)
+        episodeView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
+    }
     
     
 }

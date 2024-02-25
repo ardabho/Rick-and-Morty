@@ -9,6 +9,21 @@ import UIKit
 
 struct UIHelper {
     
+    static let borderColors: [UIColor] = [
+        .systemRed,
+        .systemOrange,
+        .systemYellow,
+        .systemTeal,
+        .systemPink,
+        .systemPurple,
+        .systemBlue,
+        .systemCyan,
+        .systemBrown,
+        .systemIndigo,
+        .systemGreen,
+        .systemGray
+    ]
+    
     static func createTwoColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
         let width = UIScreen.main.bounds.width
         let padding: CGFloat = 10

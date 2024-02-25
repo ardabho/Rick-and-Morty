@@ -13,7 +13,6 @@ protocol RMEpisodeListViewDelegate: AnyObject {
 
 ///View that handles showing list of episodes, loader, etc.
 class RMEpisodeListView: UIView {
-    
 
     private let viewModel = RMEpisodeListViewVM()
     private let loadingSpinner = RMLoadingSpinnerView()
