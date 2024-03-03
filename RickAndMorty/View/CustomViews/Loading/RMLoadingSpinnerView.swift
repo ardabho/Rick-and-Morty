@@ -45,11 +45,13 @@ class RMLoadingSpinnerView: UIView {
     
     func startLoadingAnimation() {
         spinner.startAnimating()
+        isHidden = false
     }
     
     
     func stopLoadingAnimation() {
         spinner.stopAnimating()
+        isHidden = true
     }
 }
 

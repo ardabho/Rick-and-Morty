@@ -8,6 +8,7 @@
 import UIKit
 
 final class RMEpisodeCollectionViewCell: UICollectionViewCell {
+    
     static let identifier = "RMEpisodeCollectionViewCell"
     
     private let stackView = UIStackView()

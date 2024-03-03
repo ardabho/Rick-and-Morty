@@ -114,6 +114,7 @@ class RMCharacterCollectionViewCell: UICollectionViewCell {
     
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         characterImageView.image = nil
         nameLabel.text = nil
         statusLabel.text = nil

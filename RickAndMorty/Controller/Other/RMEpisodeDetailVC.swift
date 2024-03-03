@@ -26,7 +26,10 @@ class RMEpisodeDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
+        viewModel.delegate = self
+        viewModel.fetchEpisodeData()
     }
+    
     
     private func configureVC() {
         title = "Episode"
@@ -35,4 +38,10 @@ class RMEpisodeDetailVC: UIViewController {
     }
     
     
+}
+
+extension RMEpisodeDetailVC: RMEpisodeDetailVMDelegate {
+    func didFetchEpisodeDetails() {
+        episodeView.configure(with: viewModel)
+    }
 }
