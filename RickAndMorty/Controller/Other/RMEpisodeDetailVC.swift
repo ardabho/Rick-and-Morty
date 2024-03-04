@@ -27,21 +27,31 @@ class RMEpisodeDetailVC: UIViewController {
         super.viewDidLoad()
         configureVC()
         viewModel.delegate = self
+        episodeView.delegate = self
         viewModel.fetchEpisodeData()
     }
     
     
     private func configureVC() {
-        title = "Episode"
         view.addSubview(episodeView)
         episodeView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
+        title = "Episode"
     }
     
     
 }
 
-extension RMEpisodeDetailVC: RMEpisodeDetailVMDelegate {
+extension RMEpisodeDetailVC: RMEpisodeDetailVMDelegate, RMEpisodeDetailViewDelegate {
+    
     func didFetchEpisodeDetails() {
         episodeView.configure(with: viewModel)
     }
+    
+    
+    func rmEpisodeDetailView(_ detailView: RMEpisodeDetailView, didSelect character: RMCharacter) {
+        let characterDetailVM = RMCharacterDetailVM(character: character)
+        let vc = RMCharacterDetailVC(with: characterDetailVM)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

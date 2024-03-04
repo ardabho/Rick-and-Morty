@@ -30,7 +30,7 @@ final class RMEpisodeDetailVM {
     
     private(set) var cellViewModels: [SectionType] = []
     
-    // MARK: - Init
+    private(set) var episodeTitle: String?
     
     init(url: URL?) {
         endpointURL = url
@@ -51,7 +51,7 @@ final class RMEpisodeDetailVM {
                 .init(title: "Episode Name", value: episode.name),
                 .init(title: "Air Date", value: episode.airDate),
                 .init(title: "Episode", value: episode.episode),
-                .init(title: "Created", value: episode.created),
+                .init(title: "Created", value: episode.created.formatDateFromISOToString() ?? "N/A"),
             ]),
             .characters(viewModels: characters.compactMap({ character in
                 return RMCharacterCollectionViewCellVM(
@@ -72,6 +72,7 @@ final class RMEpisodeDetailVM {
         RMService.shared.execute(request, expecting: RMEpisode.self) { [weak self] result in
             switch result {
             case .success(let model):
+                self?.episodeTitle = model.name
                 self?.fetchEpisodeCharacters(episode: model)
             case .failure(let failure):
                 print(String(describing: failure))
@@ -110,6 +111,14 @@ final class RMEpisodeDetailVM {
         group.notify(queue: .main) {
             self.dataTuple = (episode, characters)
         }
+    }
+    
+    
+    func getCharacterAtIndex(_ index: Int) -> RMCharacter? {
+        guard let dataTuple = dataTuple else {
+            return nil
+        }
+        return dataTuple.characters[index]
     }
     
 }

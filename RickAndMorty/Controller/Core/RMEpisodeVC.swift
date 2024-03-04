@@ -40,15 +40,6 @@ class RMEpisodeVC: UIViewController {
         let searchVC = RMSearchVC(searchCategory: .init(type: .episode))
         navigationController?.pushViewController(searchVC, animated: true)
     }
-    
-    //Delegate function here RMEpisodeListViewDelegate
-    
-    func RMCharacterListView(_ rmCharacterListView: RMCharacterListView, didSelectCharacter character: RMCharacter) {
-        let detailViewModel = RMCharacterDetailVM(character: character)
-        let characterDetailVC = RMCharacterDetailVC(with: detailViewModel)
-        characterDetailVC.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(characterDetailVC, animated: true)
-    }
 }
 
 extension RMEpisodeVC: RMEpisodeListViewDelegate {
@@ -58,6 +49,4 @@ extension RMEpisodeVC: RMEpisodeListViewDelegate {
         navigationController?.pushViewController(episodeDetailVC, animated: true)
 
     }
-    
-    
 }

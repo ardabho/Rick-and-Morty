@@ -7,6 +7,11 @@
 
 import UIKit
 
+
+protocol RMEpisodeDetailViewDelegate: AnyObject {
+    func rmEpisodeDetailView(_ detailView: RMEpisodeDetailView, didSelect character: RMCharacter)
+}
+
 final class RMEpisodeDetailView: UIView {
 
     private var viewModel: RMEpisodeDetailVM? {
@@ -22,6 +27,7 @@ final class RMEpisodeDetailView: UIView {
     }
     private var collectionView: UICollectionView?
     private let loadingSpinner = RMLoadingSpinnerView()
+    weak var delegate: RMEpisodeDetailViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -121,6 +127,20 @@ extension RMEpisodeDetailView: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        guard let viewModel = viewModel else { return }
+        let sections = viewModel.cellViewModels
+        let sectionType = sections[indexPath.section]
+        
+        switch sectionType {
+        case .information:
+            break
+        case .characters:
+            let character = viewModel.getCharacterAtIndex(indexPath.row)
+            
+            if let character {
+                delegate?.rmEpisodeDetailView(self, didSelect: character)
+            }
+        }
     }
 }
 
@@ -142,7 +162,7 @@ extension RMEpisodeDetailView {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100)), subitems: [item])
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80)), subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         return section

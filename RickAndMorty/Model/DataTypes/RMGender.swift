@@ -13,4 +13,12 @@ enum RMGender: String, Codable {
     case genderless = "Genderless"
     case unknown    = "unknown"
     
+    var text: String {
+        switch self {
+        case .female, .male, .genderless:
+            return self.rawValue
+        case .unknown:
+            return "Unknown"
+        }
+    }
 }

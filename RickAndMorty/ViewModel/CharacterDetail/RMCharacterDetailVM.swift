@@ -33,7 +33,7 @@ final class RMCharacterDetailVM {
             .photo(viewModel: RMCharacterPhotoCellVM(imageUrl: URL(string: character.image))),
             .information(viewModels: [
                 RmCharacterDetailInfoCellVM(type: .status, value: character.status.text),
-                RmCharacterDetailInfoCellVM(type: .gender, value: character.gender.rawValue) ,
+                RmCharacterDetailInfoCellVM(type: .gender, value: character.gender.text) ,
                 RmCharacterDetailInfoCellVM(type: .type, value: character.type ),
                 RmCharacterDetailInfoCellVM(type: .species, value: character.species ),
                 RmCharacterDetailInfoCellVM(type: .origin, value: character.origin.name ),
