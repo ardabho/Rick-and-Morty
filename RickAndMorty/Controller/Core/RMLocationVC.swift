@@ -14,11 +14,12 @@ class RMLocationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .systemBackground
         addSearchButton()
-        
-        view.addSubview(locationListView)
-        locationListView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
+        configureLocationListView()
+        viewModel.delegate = self
+        viewModel.fetchLocations()
+
     }
     
     
@@ -27,9 +28,23 @@ class RMLocationVC: UIViewController {
     }
     
     
+    private func configureLocationListView() {
+        view.addSubview(locationListView)
+        locationListView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
+    }
+    
+    
     @objc private func searchTapped() {
         let searchVC = RMSearchVC(searchCategory: .init(type: .location))
         navigationController?.pushViewController(searchVC, animated: true)
     }
 
+}
+
+
+extension RMLocationVC: RMLocationListVMDelegate {
+    
+    func didFinishFetchingInitialLocations() {
+        locationListView.configure(with: viewModel)
+    }
 }

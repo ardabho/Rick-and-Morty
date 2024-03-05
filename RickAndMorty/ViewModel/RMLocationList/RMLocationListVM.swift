@@ -7,28 +7,51 @@
 
 import Foundation
 
+protocol RMLocationListVMDelegate: AnyObject {
+    func didFinishFetchingInitialLocations()
+}
+
+
 final class RMLocationListVM {
     
-    private var locations: [RMLocation] = []
+    private var locations: [RMLocation] = [] {
+        didSet {
+            for location in locations {
+                let cellVM = RMLocationCellVM(location: location)
+                if !cellViewModels.contains(cellVM) {
+                    cellViewModels.append(cellVM)
+                }
+                
+            }
+        }
+    }
     
-    //Location response info
-    //Will contain next url, if present
+    private var apiInfo: RMInfo? //Location response info, will contain next url, if present
     
-    private var cellViewModels: [String] = []
+    private(set) var cellViewModels: [RMLocationCellVM] = []
     
     private var hasMoreResults: Bool {
         return false
     }
     
+    weak var delegate: RMLocationListVMDelegate?
+    
     init() {}
     
-
+    
     func fetchLocations() {
         
-        RMService.shared.execute(.listLocationsRequests, expecting: RMLocationsResponse.self) { result in
+        RMService.shared.execute(.listLocationsRequests, expecting: RMLocationsResponse.self) { [weak self] result in
+            guard let self else { return }
+            
             switch result {
             case .success(let model):
-                print(String(describing: model))
+                self.apiInfo = model.info
+                self.locations = model.results
+                
+                DispatchQueue.main.async {
+                    self.delegate?.didFinishFetchingInitialLocations()
+                }
             case .failure(let error):
                 break
             }
