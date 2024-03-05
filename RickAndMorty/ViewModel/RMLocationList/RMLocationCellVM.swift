@@ -14,7 +14,7 @@ struct RMLocationCellVM: Hashable, Equatable {
     init(location: RMLocation) { self.location = location }
     
     var name      : String { return location.name }
-    var type      : String { return location.type }
+    var type      : String { return "Type: " + location.type }
     var dimension : String { return location.dimension }
     
     static func == (lhs: RMLocationCellVM, rhs: RMLocationCellVM) -> Bool {

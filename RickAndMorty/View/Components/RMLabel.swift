@@ -20,10 +20,11 @@ class RMLabel: UILabel {
     }
     
     
-    convenience init(fontsize: CGFloat = 17, fontWeight: UIFont.Weight = .regular, textAlignment: NSTextAlignment = .natural ) {
+    convenience init(fontsize: CGFloat = 17, fontWeight: UIFont.Weight = .regular, textAlignment: NSTextAlignment = .natural, textColor: UIColor = .label ) {
         self.init(frame: .zero)
         self.font = UIFont.systemFont(ofSize: fontsize, weight: fontWeight)
         self.textAlignment = textAlignment
+        self.textColor = textColor
     }
 
     

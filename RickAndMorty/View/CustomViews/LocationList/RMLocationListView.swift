@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol RMLocationListViewDelegate: AnyObject {
+    func rmLocationListView(_ view: RMLocationListView, didSelect location: RMLocation)
+}
+
 class RMLocationListView: UIView {
     
     //MARK: Components
@@ -24,6 +28,8 @@ class RMLocationListView: UIView {
             }
         }
     }
+    
+    weak var delegate: RMLocationListViewDelegate?
     
     //MARK: Init
     override init(frame: CGRect) {
@@ -65,7 +71,10 @@ class RMLocationListView: UIView {
 extension RMLocationListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //Notify Controller of selection
+        guard let location = viewModel?.getLocation(for: indexPath.row) else { return }
+        
+        delegate?.rmLocationListView(self, didSelect: location)
+        
     }
 }
 
@@ -84,7 +93,7 @@ extension RMLocationListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellViewModel = viewModel?.cellViewModels[indexPath.row] else { fatalError() }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RMLocationCell.identifier, for: indexPath) as? RMLocationCell else { return UITableViewCell() }
-        cell.textLabel?.text = cellViewModel.name
+        cell.configure(with: cellViewModel)
         return cell
     }
     

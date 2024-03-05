@@ -38,6 +38,7 @@ class RMEpisodeListView: UIView {
     private func configureView() {
         translatesAutoresizingMaskIntoConstraints = false
         viewModel.delegate = self
+        backgroundColor = .systemBackground
     }
     
     

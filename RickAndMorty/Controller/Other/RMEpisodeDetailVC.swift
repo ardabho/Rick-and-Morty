@@ -34,6 +34,7 @@ class RMEpisodeDetailVC: UIViewController {
     
     private func configureVC() {
         view.addSubview(episodeView)
+        view.backgroundColor = .systemBackground
         episodeView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
         title = "Episode"
     }

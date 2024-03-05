@@ -18,6 +18,7 @@ class RMLocationVC: UIViewController {
         addSearchButton()
         configureLocationListView()
         viewModel.delegate = self
+        locationListView.delegate = self
         viewModel.fetchLocations()
 
     }
@@ -47,4 +48,13 @@ extension RMLocationVC: RMLocationListVMDelegate {
     func didFinishFetchingInitialLocations() {
         locationListView.configure(with: viewModel)
     }
+}
+
+
+extension RMLocationVC: RMLocationListViewDelegate {
+    func rmLocationListView(_ view: RMLocationListView, didSelect location: RMLocation) {
+        print("damn")
+    }
+    
+    
 }

@@ -38,6 +38,11 @@ final class RMLocationListVM {
     
     init() {}
     
+    func getLocation(for index: Int) -> RMLocation? {
+        guard index < locations.count else { return nil }
+        return locations[index]
+    }
+    
     
     func fetchLocations() {
         
