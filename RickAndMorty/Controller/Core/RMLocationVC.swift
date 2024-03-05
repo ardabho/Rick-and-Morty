@@ -9,10 +9,16 @@ import UIKit
 
 class RMLocationVC: UIViewController {
 
+    private let locationListView = RMLocationListView()
+    private let viewModel = RMLocationListVM()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        
         addSearchButton()
+        
+        view.addSubview(locationListView)
+        locationListView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
     }
     
     
