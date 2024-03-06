@@ -17,10 +17,7 @@ class RMLocationVC: UIViewController {
         view.backgroundColor = .systemBackground
         addSearchButton()
         configureLocationListView()
-        viewModel.delegate = self
-        locationListView.delegate = self
-        viewModel.fetchLocations()
-
+        configureViewModel()
     }
     
     
@@ -31,7 +28,14 @@ class RMLocationVC: UIViewController {
     
     private func configureLocationListView() {
         view.addSubview(locationListView)
+        locationListView.delegate = self
         locationListView.pinToEdgesWithSafeAreaLayoutGuide(of: view)
+    }
+    
+    
+    private func configureViewModel() {
+        viewModel.delegate = self
+        viewModel.fetchLocations()
     }
     
     
@@ -53,8 +57,8 @@ extension RMLocationVC: RMLocationListVMDelegate {
 
 extension RMLocationVC: RMLocationListViewDelegate {
     func rmLocationListView(_ view: RMLocationListView, didSelect location: RMLocation) {
-        print("damn")
+        let vc = RMLocationDetailVC(url: URL(string: location.url))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }

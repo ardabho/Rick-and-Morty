@@ -80,7 +80,7 @@ final class RMCharacterDetailVM {
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1), heightDimension: .absolute(120)),
+                widthDimension: .fractionalWidth(1), heightDimension: .absolute(100)),
             subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

@@ -10,7 +10,7 @@ import UIKit
 final class RmCharacterDetailInfoViewCell: UICollectionViewCell {
     static let identifier = "RmCharacterDetailInfoViewCell"
     
-    private let titleLabel = RMLabel(fontsize: 16, fontWeight: .semibold, textAlignment: .center)
+    private let titleLabel = RMLabel(fontsize: 15, fontWeight: .semibold, textAlignment: .center)
     private let valueLabel = RMLabel(fontsize: 15, fontWeight: .medium, textAlignment: .center)
     private let titleContainer = UIView()
     private let valueContainer = UIView()
@@ -53,7 +53,7 @@ final class RmCharacterDetailInfoViewCell: UICollectionViewCell {
             titleContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             titleContainer.topAnchor.constraint(equalTo: contentView.topAnchor),
-            titleContainer.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.40),
+            titleContainer.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.45),
         ])
     }
     

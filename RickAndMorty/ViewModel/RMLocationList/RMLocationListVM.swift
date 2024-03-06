@@ -58,7 +58,7 @@ final class RMLocationListVM {
                     self.delegate?.didFinishFetchingInitialLocations()
                 }
             case .failure(let error):
-                break
+                print(error.localizedDescription)
             }
         }
     }

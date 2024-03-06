@@ -43,7 +43,6 @@ final class RMService {
         //Check if the data is cached and return cache data if it exists
         if let cachedData = cacheManager.cachedResponse(for: request.endpoint, url: URL(string: request.urlString)) {
             if let result = try? JSONDecoder().decode(type.self, from: cachedData) {
-                print("using cached data")
                 completion(.success(result))
                 return
             }
